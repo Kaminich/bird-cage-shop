@@ -12,7 +12,7 @@ Bird Cage Shop -- Bird sales management system for bird farms
 
 - UI is built with ReactJS + Vite.
 
-![Bird Cage Shop Page](./image.png)
+![Bird Cage Shop Page](./BCSPage.jpg)
 
 #### Connect me via caominhnguyen03@gmail.com
 
