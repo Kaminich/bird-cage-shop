@@ -16,10 +16,8 @@ import QuestionPage from "./page/authenticationpage/forgotpasswordpage/QuestionP
 import ResetPasswordPage from "./page/authenticationpage/forgotpasswordpage/ResetPasswordPage";
 import SignUpPage from "./page/authenticationpage/SignUpPage";
 import UpdateInformationPage from "./page/authenticationpage/UpdateInformationPage";
-import "./App.css";
 import UserPage from "./page/UserPage";
 import SettingInformationPage from "./page/SettingInformationPage";
-
 import CreateVoucherPage from "./page/rolepage/managerpage/CreateVoucherPage";
 import CustomPage from "./page/custompage/CustomPage";
 import ShapePage from "./page/custompage/ShapePage";
@@ -39,13 +37,14 @@ import ManageAccount from "./page/rolepage/adminpage/ManageAccount";
 import CreateUser from "./page/rolepage/adminpage/CreateUser";
 import AddProductPage from "./page/rolepage/managerpage/AddProductPage";
 import BlogForm from "./page/rolepage/staffpage/CreateBlog";
-import ConfirmPage from "./page/ConfirmPage";
+import OrderConfirmPage from "./page/OrderConfirmPage";
 import TermsAndConditionsPage from "./page/TermsAndConditionsPage";
 import Dashboard from "./page/rolepage/managerpage/dashboard/Dashboard";
 import InventoryDashboard from "./page/rolepage/managerpage/dashboard/InventoryDashboard";
 import RevenueDashboard from "./page/rolepage/managerpage/dashboard/RevenueDashboard";
 import OrderDashboard from "./page/rolepage/managerpage/dashboard/OrderDashboard";
 import SearchPage from "./page/SearchPage";
+import "./App.css";
 
 const App = () => {
   return (
@@ -83,7 +82,7 @@ const App = () => {
           <Route path="/custom-products-material/:productId?" element={<MaterialPage />} />
           <Route path="/custom-products-color/:productId?" element={<ColorPage />} />
           <Route path="/custom-products-end/:orderId?/:productId?" element={<TotalPage />} />
-          <Route path="/order-confirm" element={<ConfirmPage />} />
+          <Route path="/order-confirm" element={<OrderConfirmPage />} />
         </Route>
         <Route path="/update-info/:userId" element={<SettingInformationPage />}
         />

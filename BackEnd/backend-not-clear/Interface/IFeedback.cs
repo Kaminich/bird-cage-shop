@@ -9,10 +9,10 @@ namespace backend_not_clear.Interface
     public interface IFeedback
     {
         public Task<FeedBack> CreateFeedback(CreateFeedback request);
-        public Task<FeedBack> Reply(ReplyFeedback request);
+        //public Task<FeedBack> Reply(ReplyFeedback request);
         public Task<FeedBack> UpdateFeedback(UpdateFeedback request);
-        public Task<FeedBack> UpdateReply(UpdateReply request);
+        //public Task<FeedBack> UpdateReply(UpdateReply request);
         public Task<bool> RemoveFeedback(RemoveFeedback request);
-        public Task<bool> RemoveReply(RemoveReply request);
+        //public Task<bool> RemoveReply(RemoveReply request);
     }
 }

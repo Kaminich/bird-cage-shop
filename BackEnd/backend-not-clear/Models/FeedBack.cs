@@ -12,7 +12,7 @@ namespace backend_not_clear.Models
     {
         public FeedBack()
         {
-            InverseReply = new HashSet<FeedBack>();
+            //InverseReply = new HashSet<FeedBack>();
             OrderDetail = new HashSet<OrderDetail>();
         }
 
@@ -24,10 +24,10 @@ namespace backend_not_clear.Models
         [Column("UserID")]
         [StringLength(10)]
         public string UserId { get; set; }
-        [Required]
-        [Column("ReplyID")]
-        [StringLength(10)]
-        public string ReplyId { get; set; }
+        //[Required]
+        //[Column("ReplyID")]
+        //[StringLength(10)]
+        //public string ReplyId { get; set; }
         [Column(TypeName = "datetime")]
         public DateTime DateTime { get; set; }
         public string FeedbackContent { get; set; }
@@ -35,15 +35,15 @@ namespace backend_not_clear.Models
         public string Rating { get; set; }
         public bool Status { get; set; }
 
-        [ForeignKey("ReplyId")]
-        [InverseProperty("InverseReply")]
-        public virtual FeedBack Reply { get; set; }
+        //[ForeignKey("ReplyId")]
+        //[InverseProperty("InverseReply")]
+        //public virtual FeedBack Reply { get; set; }
         [ForeignKey("UserId")]
         [InverseProperty("FeedBack")]
         public virtual User User { get; set; }
-        [InverseProperty("Reply")]
-        public virtual ICollection<FeedBack> InverseReply { get; set; }
-        [InverseProperty("Feedback")]
+        //[InverseProperty("Reply")]
+        //public virtual ICollection<FeedBack> InverseReply { get; set; }
+        //[InverseProperty("Feedback")]
         public virtual ICollection<OrderDetail> OrderDetail { get; set; }
     }
 }

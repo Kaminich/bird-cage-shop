@@ -28,7 +28,7 @@ namespace backend_not_clear.Service
                 if (request == null)
                     throw new Exception("Fail to give Feedback");
                 feedback.FeedbackId = request.FeedbackID;
-                feedback.Reply = null;
+                //feedback.Reply = null;
                 feedback.UserId = request.UserID;
                 feedback.DateTime = DateTime.UtcNow;
                 feedback.FeedbackContent = request.FeedbackContent ?? null;
@@ -48,31 +48,31 @@ namespace backend_not_clear.Service
                 throw new Exception($"{ex.Message}");
             }
         }
-        public async Task<FeedBack> Reply(ReplyFeedback request)
-        {
-            try
-            {
-                if (request == null) 
-                    throw new Exception("Fail to Reply");
-                var feedback = await this._context.FeedBack.Where(x => x.FeedbackId.Equals(request.RepID)).FirstOrDefaultAsync();
-                if(feedback == null)
-                    throw new Exception("Not Found Feedback To Reply");
-                FeedBack reply = new FeedBack();
-                reply.FeedbackId = request.FeedbackID;
-                reply.UserId = request.UserID;
-                reply.ReplyId = request.RepID;
-                reply.FeedbackContent = request.FeedbackContent;
-                reply.DateTime = DateTime.UtcNow;    
-                reply.Status = true;
-                await this._context.FeedBack.AddAsync(reply); 
-                await this._context.SaveChangesAsync(); 
-                return reply;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"{ex.Message}");
-            }
-        }
+        //public async Task<FeedBack> Reply(ReplyFeedback request)
+        //{
+        //    try
+        //    {
+        //        if (request == null) 
+        //            throw new Exception("Fail to Reply");
+        //        var feedback = await this._context.FeedBack.Where(x => x.FeedbackId.Equals(request.RepID)).FirstOrDefaultAsync();
+        //        if(feedback == null)
+        //            throw new Exception("Not Found Feedback To Reply");
+        //        FeedBack reply = new FeedBack();
+        //        reply.FeedbackId = request.FeedbackID;
+        //        reply.UserId = request.UserID;
+        //        reply.ReplyId = request.RepID;
+        //        reply.FeedbackContent = request.FeedbackContent;
+        //        reply.DateTime = DateTime.UtcNow;    
+        //        reply.Status = true;
+        //        await this._context.FeedBack.AddAsync(reply); 
+        //        await this._context.SaveChangesAsync(); 
+        //        return reply;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception($"{ex.Message}");
+        //    }
+        //}
 
         public async Task<bool> RemoveFeedback(RemoveFeedback request)
         {
@@ -81,12 +81,12 @@ namespace backend_not_clear.Service
                 if (request == null)
                     throw new Exception("Fail to remove Feedback");
                 var feedback = await this._context.FeedBack.Where(x => x.FeedbackId.Equals(request.BlogID)).FirstOrDefaultAsync();
-                var rep = await this._context.FeedBack.Where(x => x.ReplyId.Equals(feedback.FeedbackId)).FirstOrDefaultAsync();
+                //var rep = await this._context.FeedBack.Where(x => x.ReplyId.Equals(feedback.FeedbackId)).FirstOrDefaultAsync();
                 if (feedback == null)
                     throw new Exception("Not found Feedback");
                 //feedback.Status = false;
-                if(rep != null)
-                    this._context.FeedBack.Remove(rep);
+                //if(rep != null)
+                //    this._context.FeedBack.Remove(rep);
                 this._context.FeedBack.Remove(feedback);
                 await this._context.SaveChangesAsync();
                 return true;
@@ -97,24 +97,24 @@ namespace backend_not_clear.Service
             }
         }
 
-        public async Task<bool> RemoveReply(RemoveReply request)
-        {
-            try
-            {
-                if (request == null)
-                    throw new Exception("Fail to remove Feedback");
-                var feedback = await this._context.FeedBack.Where(x => x.ReplyId.Equals(request.RepID)).FirstOrDefaultAsync();
-                if (feedback == null)
-                    throw new Exception("Not found Feedback");
-                this._context.FeedBack.Remove(feedback);
-                await this._context.SaveChangesAsync(); 
-                return true;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"{ex.Message}");
-            }
-        }
+        //public async Task<bool> RemoveReply(RemoveReply request)
+        //{
+        //    try
+        //    {
+        //        if (request == null)
+        //            throw new Exception("Fail to remove Feedback");
+        //        var feedback = await this._context.FeedBack.Where(x => x.ReplyId.Equals(request.RepID)).FirstOrDefaultAsync();
+        //        if (feedback == null)
+        //            throw new Exception("Not found Feedback");
+        //        this._context.FeedBack.Remove(feedback);
+        //        await this._context.SaveChangesAsync(); 
+        //        return true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception($"{ex.Message}");
+        //    }
+        //}
 
         public async Task<FeedBack> UpdateFeedback(UpdateFeedback request)
         {
@@ -137,24 +137,24 @@ namespace backend_not_clear.Service
             }
         }
 
-        public async Task<FeedBack> UpdateReply(UpdateReply request)
-        {
-            try
-            {
-                if (request == null)
-                    throw new Exception("Fail to update Feedback");
-                var reply = await this._context.FeedBack.Where(x => x.ReplyId.Equals(request.RepID)).FirstOrDefaultAsync();
-                if (reply == null)
-                    throw new Exception("Not found Feedback");
-                reply.FeedbackContent = request.content ?? reply.FeedbackContent;
-                this._context.FeedBack.Update(reply);
-                await this._context.SaveChangesAsync();
-                return reply;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"{ex.Message}");
-            }
-        }
+        //public async Task<FeedBack> UpdateReply(UpdateReply request)
+        //{
+        //    try
+        //    {
+        //        if (request == null)
+        //            throw new Exception("Fail to update Feedback");
+        //        var reply = await this._context.FeedBack.Where(x => x.ReplyId.Equals(request.RepID)).FirstOrDefaultAsync();
+        //        if (reply == null)
+        //            throw new Exception("Not found Feedback");
+        //        reply.FeedbackContent = request.content ?? reply.FeedbackContent;
+        //        this._context.FeedBack.Update(reply);
+        //        await this._context.SaveChangesAsync();
+        //        return reply;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception($"{ex.Message}");
+        //    }
+        //}
     }
 }

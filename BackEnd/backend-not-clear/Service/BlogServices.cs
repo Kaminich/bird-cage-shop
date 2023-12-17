@@ -55,6 +55,7 @@ namespace backend_not_clear.Service
                 List<Blog> blog = new List<Blog>();
                 var list = await this._context.Blog.Where(x => x.Status)
                                                    .Include(x => x.User)
+                                                   .Include(x => x.Image)
                                                    .ToListAsync();
                 if (list != null)
                     return list;

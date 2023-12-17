@@ -153,7 +153,7 @@ namespace backend_not_clear.Service
                 return await this._context.OrderDetail.Where(x => x.OrderId.Equals(orderID)).ToListAsync();
             }catch (Exception ex) 
             { 
-                throw new Exception(); 
+                throw new Exception(ex.Message); 
             }
         }
     }

@@ -14,6 +14,9 @@
 }
 
 .confirmed-order {
+  display: block;
+  text-decoration: none;
+  color: black;
   border: 1px solid #ddd;
   padding: 5x;
   margin: 40px 0;

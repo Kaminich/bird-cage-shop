@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import Carousel from "../components/carousel/Carousel";
+import React, { Fragment, useEffect, useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
-import "../components/button/QuantityButton.css";
-import "./ItemInformationPage.css";
 import { useParams, useNavigate } from "react-router-dom";
 import api from "../components/utils/requestAPI";
 import useAuth from "../hooks/useAuth";
 import ProductFeedbackList from "../components/feedback/ProductFeedbackList";
+import Carousel from "../components/carousel/Carousel";
+import "../components/button/QuantityButton.css";
+import "./ItemInformationPage.css";
 
 const ItemInformation = () => {
   const { auth } = useAuth();
@@ -22,9 +22,8 @@ const ItemInformation = () => {
   const [popup, setPopup] = useState(false);
 
   const current = new Date();
-  const date = `${current.getFullYear()}-${
-    current.getMonth() + 1
-  }-${current.getDate()}`;
+  const date = `${current.getFullYear()}-${current.getMonth() + 1
+    }-${current.getDate()}`;
 
   const navigate = useNavigate();
 
@@ -197,6 +196,22 @@ const ItemInformation = () => {
     }
   };
 
+  const formatDescription = (description) => {
+    const paragraphs = description?.split("\\n");
+    console.log(paragraphs)
+    return paragraphs?.map((paragraph, index) => (
+      <p key={index} className="product-information-detail-description">
+        {/* {paragraph.split("\n").map((line, lineIndex) => (
+          <Fragment key={lineIndex}>
+            {line}
+            <br />
+          </Fragment>
+        ))} */}
+        {paragraph}
+      </p>
+    ));
+  };
+
   function formatCash(currency) {
     return currency?.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   }
@@ -266,9 +281,7 @@ const ItemInformation = () => {
             <h4 className="product-information-detail-heading">
               Mô tả sản phẩm
             </h4>
-            <p className="product-information-detail-description">
-              {product?.description}
-            </p>
+            {formatDescription(product?.description)}
           </div>
 
           <ProductFeedbackList productId={productId} action={"view-product"} />
@@ -340,9 +353,7 @@ const ItemInformation = () => {
             <h4 className="product-information-detail-heading">
               Mô tả sản phẩm
             </h4>
-            <p className="product-information-detail-description">
-              {product?.description}
-            </p>
+            {formatDescription(product?.description)}
           </div>
 
           <ProductFeedbackList productId={productId} action={"edit-product"} />
@@ -421,9 +432,7 @@ const ItemInformation = () => {
 
         <div className="product-information-detail">
           <h4 className="product-information-detail-heading">Mô tả sản phẩm</h4>
-          <p className="product-information-detail-description">
-            {product?.description}
-          </p>
+          {formatDescription(product?.description)}
         </div>
 
         <ProductFeedbackList productId={productId} />

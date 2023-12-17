@@ -19,7 +19,7 @@ const ViewOrderPage = () => {
   }, [order, customOrder]);
 
   const fetchOrder = async () => {
-    const url = `/api/Order/get-to-confirm`;
+    const url = `/api/Order/get-all`;
     setLoading(true);
     try {
       const response = await api.get(url);

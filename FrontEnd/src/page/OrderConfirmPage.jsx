@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from "react";
-import "./OrderStatusPage.css";
+import "./OrderConfirmPage.css";
 import useAuth from "../hooks/useAuth";
 import api from "../components/utils/requestAPI";
+import { Link } from "react-router-dom";
 
-const ConfirmPage = () => {
+const OrderConfirmPage = () => {
   const { auth } = useAuth();
-  // const products = [
-  //   'Lồng 1',
-  //   'Lồng 2',
-  //   'Lồng 3',
-  // ]
 
   const [order, setOrder] = useState(null);
   const [user, setUser] = useState(null);
@@ -62,7 +58,7 @@ const ConfirmPage = () => {
               address = infoArray.slice(2).join(" ");
             }
             return (
-              <div key={detail.orderId} className="confirmed-order">
+              <Link to='' key={detail.orderId} className="confirmed-order">
                 <h3 className="confirmed-order-id">
                   Mã đơn hàng: {detail.orderId}
                 </h3>
@@ -107,7 +103,7 @@ const ConfirmPage = () => {
                     })}
                   </div>
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>
@@ -134,4 +130,4 @@ const ConfirmPage = () => {
   }
 };
 
-export default ConfirmPage;
+export default OrderConfirmPage;

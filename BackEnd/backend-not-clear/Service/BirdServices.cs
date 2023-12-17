@@ -134,9 +134,12 @@ namespace backend_not_clear.Service
         {
             try
             {
-                var bird = await this._context.Bird.Where(x => x.BirdId.Equals(id)).FirstOrDefaultAsync();
+                var bird = await this._context.Bird.Where(x => x.BirdId.Equals(id))
+                           .Include(x => x.Image)
+                           .FirstOrDefaultAsync();
                 return bird;
-            }catch  
+            }
+            catch
             (Exception ex)
             {
                 throw new Exception(ex.Message);

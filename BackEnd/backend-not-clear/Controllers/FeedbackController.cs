@@ -38,23 +38,23 @@ namespace backend_not_clear.Controllers
             }
         }
 
-        [Authorize(Roles = "3")]
-        [Route("create-reply-feedback")]
-        [HttpPut]
-        public async Task<IActionResult> CreateReplyFeedback(ReplyFeedback request)
-        {
-            ResponseAPI<FeedBack> responseAPI = new ResponseAPI<FeedBack>();
-            try
-            {
-                responseAPI.Data = await service.Reply(request);
-                return Ok(responseAPI);
-            }
-            catch (Exception ex)
-            {
-                responseAPI.message = ex.Message;
-                return BadRequest(ex.Message);
-            }
-        }
+        //[Authorize(Roles = "3")]
+        //[Route("create-reply-feedback")]
+        //[HttpPut]
+        //public async Task<IActionResult> CreateReplyFeedback(ReplyFeedback request)
+        //{
+        //    ResponseAPI<FeedBack> responseAPI = new ResponseAPI<FeedBack>();
+        //    try
+        //    {
+        //        responseAPI.Data = await service.Reply(request);
+        //        return Ok(responseAPI);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        responseAPI.message = ex.Message;
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
 
         [AllowAnonymous]
         [Route("update-feedback")]
@@ -74,23 +74,23 @@ namespace backend_not_clear.Controllers
             }
         }
 
-        [AllowAnonymous]
-        [Route("update-reply-feedback")]
-        [HttpPut]
-        public async Task<IActionResult> UpdateReplyFeedback(UpdateReply request)
-        {
-            ResponseAPI<FeedBack> responseAPI = new ResponseAPI<FeedBack>();
-            try
-            {
-                responseAPI.Data = await service.UpdateReply(request);
-                return Ok(responseAPI);
-            }
-            catch (Exception ex)
-            {
-                responseAPI.message = ex.Message;
-                return BadRequest(ex.Message);
-            }
-        }
+        //[AllowAnonymous]
+        //[Route("update-reply-feedback")]
+        //[HttpPut]
+        //public async Task<IActionResult> UpdateReplyFeedback(UpdateReply request)
+        //{
+        //    ResponseAPI<FeedBack> responseAPI = new ResponseAPI<FeedBack>();
+        //    try
+        //    {
+        //        responseAPI.Data = await service.UpdateReply(request);
+        //        return Ok(responseAPI);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        responseAPI.message = ex.Message;
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
 
         [AllowAnonymous]
         [Route("remove-feedback")]
@@ -110,22 +110,22 @@ namespace backend_not_clear.Controllers
             }
         }
 
-        [AllowAnonymous]
-        [Route("remove-reply-feedback")]
-        [HttpDelete]
-        public async Task<IActionResult> RemoveReply(RemoveReply request)
-        {
-            ResponseAPI<FeedBack> responseAPI = new ResponseAPI<FeedBack>();
-            try
-            {
-                responseAPI.Data = await service.RemoveReply(request);
-                return Ok(responseAPI);
-            }
-            catch (Exception ex)
-            {
-                responseAPI.message = ex.Message;
-                return BadRequest(ex.Message);
-            }
-        }
+        //[AllowAnonymous]
+        //[Route("remove-reply-feedback")]
+        //[HttpDelete]
+        //public async Task<IActionResult> RemoveReply(RemoveReply request)
+        //{
+        //    ResponseAPI<FeedBack> responseAPI = new ResponseAPI<FeedBack>();
+        //    try
+        //    {
+        //        responseAPI.Data = await service.RemoveReply(request);
+        //        return Ok(responseAPI);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        responseAPI.message = ex.Message;
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
     }
 }

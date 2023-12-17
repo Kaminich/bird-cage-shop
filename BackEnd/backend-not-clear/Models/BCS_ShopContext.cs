@@ -144,11 +144,11 @@ namespace backend_not_clear.Models
             {
                 entity.Property(e => e.Rating).IsFixedLength();
 
-                entity.HasOne(d => d.Reply)
-                    .WithMany(p => p.InverseReply)
-                    .HasForeignKey(d => d.ReplyId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_FeedBack_FeedBack");
+                //entity.HasOne(d => d.Reply)
+                //    .WithMany(p => p.InverseReply)
+                //    .HasForeignKey(d => d.ReplyId)
+                //    .OnDelete(DeleteBehavior.ClientSetNull)
+                //    .HasConstraintName("FK_FeedBack_FeedBack");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.FeedBack)
