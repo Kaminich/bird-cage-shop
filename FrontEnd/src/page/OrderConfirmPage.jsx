@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import "./OrderConfirmPage.css";
+import { Link } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import api from "../components/utils/requestAPI";
-import { Link } from "react-router-dom";
+import "./OrderConfirmPage.css";
 
 const OrderConfirmPage = () => {
   const { auth } = useAuth();

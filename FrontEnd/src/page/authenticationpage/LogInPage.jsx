@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import "./AuthenticationPage.css";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import useAuth from "../../hooks/useAuth";
-import { Link, useNavigate } from "react-router-dom";
 import api from "../../components/utils/requestAPI";
+import "./AuthenticationPage.css";
+
 
 const LogInPage = () => {
   const { setAuth } = useAuth();
@@ -15,6 +16,7 @@ const LogInPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
+  const [loginFailed, setLoginFailed] = useState(false);
   const [authen, setAuthen] = useState();
 
   const handleSubmit = async (event) => {
@@ -31,10 +33,11 @@ const LogInPage = () => {
       console.log(response.data);
       localStorage.setItem("Authen", response.data);
       setAuthen(response.data);
-
       setIsLoading(false);
+      setLoginFailed(false);
     } catch (error) {
       console.error(error);
+      setLoginFailed(true);
     }
 
     if (isLoading) {
@@ -62,13 +65,9 @@ const LogInPage = () => {
         const response = await api.post(url, data);
         var user = response.data;
         setAuth({ user, authen });
-        if (user.roleId === "4") {
-          console.log("ys");
-          navigate("/user-page");
-        }
-        if (user.roleId === "1") {
-          navigate("/admin-page");
-        }
+        console.log(authen)
+        if (user.roleId === "4") navigate("/user-page");
+        if (user.roleId === "1") navigate("/admin-page");
         if (user.roleId === "2") navigate("/manager-page");
         if (user.roleId === "3") navigate("/staff-page");
       } catch (error) {
@@ -130,12 +129,15 @@ const LogInPage = () => {
               </button>
             </div>
           </div>
-          {/* <Link to="/question/forgot-pass" className="forgot-password-link">
+          <Link to="/question/forgot-pass" className="forgot-password-link">
             Quên mật khẩu?
-          </Link> */}
+          </Link>
           <button type="submit" className="authentication-button">
             Đăng nhập
           </button>
+          {loginFailed && (
+            <p className="text-danger">Tên đăng nhập hoặc mật khẩu đã không chính xác</p>
+          )}
         </form>
         <p>
           Chưa có tài khoản đăng nhập? <Link to="/sign-up">Đăng ký</Link>

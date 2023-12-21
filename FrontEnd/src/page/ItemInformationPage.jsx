@@ -5,6 +5,7 @@ import api from "../components/utils/requestAPI";
 import useAuth from "../hooks/useAuth";
 import ProductFeedbackList from "../components/feedback/ProductFeedbackList";
 import Carousel from "../components/carousel/Carousel";
+import PopupModal from "../components/modal/PopupModal";
 import "../components/button/QuantityButton.css";
 import "./ItemInformationPage.css";
 
@@ -19,7 +20,8 @@ const ItemInformation = () => {
 
   const [quantity, setQuantity] = useState(1);
 
-  const [popup, setPopup] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
+  const [statusReturn, setStatusReturn] = useState(false);
 
   const current = new Date();
   const date = `${current.getFullYear()}-${current.getMonth() + 1
@@ -78,11 +80,18 @@ const ItemInformation = () => {
     fetchData();
   }, [auth]);
 
+  const handleShowPopup = async () => {
+    setShowPopup(true);
+  };
+
+  const handleClose = () => {
+    setShowPopup(false);
+  };
+
   const handleSubmit = async () => {
     const userid = auth.user.userId;
     //if user have order
     if (typeof order[0]?.orderId !== "undefined") {
-      console.log("ys");
       const urlOrderDetail = "/api/OrderDetail/create-new";
       const data = {
         orderId: order[0].orderId,
@@ -108,7 +117,7 @@ const ItemInformation = () => {
           try {
             const responseUpdate = await api.put(urlUpdate, data);
             console.log(responseUpdate.data);
-            // window.prompt("Add Success");
+            handleShowPopup();
           } catch (error) {
             console.error(error);
           }
@@ -158,7 +167,7 @@ const ItemInformation = () => {
               try {
                 const responseUpdate = await api.put(urlUpdate, data);
                 console.log(responseUpdate.data);
-                window.prompt("Add Success");
+                handleShowPopup();
               } catch (error) {
                 console.error(error);
               }
@@ -201,12 +210,6 @@ const ItemInformation = () => {
     console.log(paragraphs)
     return paragraphs?.map((paragraph, index) => (
       <p key={index} className="product-information-detail-description">
-        {/* {paragraph.split("\n").map((line, lineIndex) => (
-          <Fragment key={lineIndex}>
-            {line}
-            <br />
-          </Fragment>
-        ))} */}
         {paragraph}
       </p>
     ));
@@ -216,13 +219,13 @@ const ItemInformation = () => {
     return currency?.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   }
 
-  if (auth?.user?.roleId === "3") {
+  if (auth?.user?.roleId === "3" || auth?.user?.roleId === "2") {
     if (action === "view-product") {
       return (
         <div className="product-information-layout">
           <div className="product-information-container">
             <div className="product-information-image">
-              <img src={product?.image[0]?.imageUrl} alt="Food" />
+              <img src={product?.image[0]?.imageUrl} alt={product?.productName} />
             </div>
             <div className="product-information-summary">
               <h2 className="product-information-title">
@@ -290,7 +293,7 @@ const ItemInformation = () => {
             <h3 className="different-products-carousel-heading">
               Các sản phẩm tương tự
             </h3>
-            <Carousel className="Product" />
+            <Carousel className="Cage" />
           </div>
         </div>
       );
@@ -299,7 +302,7 @@ const ItemInformation = () => {
         <div className="product-information-layout">
           <div className="product-information-container">
             <div className="product-information-image">
-              <img src={product?.image[0]?.imageUrl} alt="Food" />
+              <img src={product?.image[0]?.imageUrl} alt={product?.productName} />
             </div>
             <div className="product-information-summary">
               <p className="product-information-description">
@@ -362,7 +365,7 @@ const ItemInformation = () => {
             <h3 className="different-products-carousel-heading">
               Các sản phẩm tương tự
             </h3>
-            <Carousel className="Product" />
+            <Carousel className="Cage" />
           </div>
         </div>
       );
@@ -372,7 +375,7 @@ const ItemInformation = () => {
       <div className="product-information-layout">
         <div className="product-information-container">
           <div className="product-information-image">
-            <img src={product?.image[0]?.imageUrl} alt="Food" />
+            <img src={product?.image[0]?.imageUrl} alt={product?.productName} />
           </div>
           <div className="product-information-summary">
             <h2 className="product-information-title">
@@ -428,6 +431,15 @@ const ItemInformation = () => {
               Thêm vào giỏ hàng
             </button>{" "}
           </div>
+          {showPopup && (
+            <PopupModal
+              action={"success"}
+              statusReturn={statusReturn}
+              setStatusReturn={setStatusReturn}
+              open={true}
+              onClose={handleClose}
+            />
+          )}
         </div>
 
         <div className="product-information-detail">
@@ -441,7 +453,7 @@ const ItemInformation = () => {
           <h3 className="different-products-carousel-heading">
             Các sản phẩm tương tự
           </h3>
-          <Carousel className="Product" />
+          <Carousel className="Cage" />
         </div>
       </div>
     );

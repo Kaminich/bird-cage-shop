@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import "./OrderPage.css";
 import { useParams } from "react-router-dom";
 import api from "../../../components/utils/requestAPI";
+import "./OrderPage.css";
 
 const ViewOrderPage = () => {
   const { action } = useParams();
